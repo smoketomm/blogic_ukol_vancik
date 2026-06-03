@@ -1,13 +1,13 @@
 using Blogic_ukol_vancik.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
+using System.Security.Cryptography.Xml;
 
 namespace Blogic_ukol_vancik.Controllers
 {
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
-
         public HomeController(ILogger<HomeController> logger)
         {
             _logger = logger;
@@ -15,7 +15,10 @@ namespace Blogic_ukol_vancik.Controllers
 
         public IActionResult Index()
         {
-            return View(new HomeViewModel { Napis = false});
+            List<SmlouvaViewModel> smlouvy = new List<SmlouvaViewModel>();
+            smlouvy.Add(new SmlouvaViewModel { evCislo = 1111, instituce = "CSOB", klient = "Mavek", Spravci = new List<string>(){"Tomáš"}, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
+            smlouvy.Add(new SmlouvaViewModel { evCislo = 555, instituce = "Aliany", klient = "Kuba", Spravci = new List<string>() { "Picus" }, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
+            return View(smlouvy);
         }
 
         public IActionResult Privacy()

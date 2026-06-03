@@ -17,6 +17,50 @@ html {
   min-height: 100%;
 }
 
+*, *::after, *:before {
+    box-sizing: border-box;
+}
+
+body, h1, h2, h3, h4, h5, h6, p, a, ol, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
 body {
   margin-bottom: 60px;
+}
+
+.home-header {
+    padding: 200px 0;
+    background: url(../imgs/pravnik-pozadi.jpg) no-repeat center;
+}
+
+.home-header > h1 {
+    text-align: center;
+    margin: auto;
+    width: max-content;
+    padding: 10px 25px;
+    border-radius: 10px;
+    font-size: 100px;
+    background: red;
+    color: #fff;
+    transform: skewx(-10deg);
+}
+
+.seznam-smlouvy {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 20px;
+    flex: 1 1 0px;
+}
+
+.seznam-smlouva {
+    padding: 30px 50px;
+    border: 1px solid grey;
+    font-size: 20px;
+    border-radius: 7px;
+}
+
+.seznam-smlouva-tlacitka {
+    justify-self: end;
 }

@@ -28,3 +28,4 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.pdb
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.genruntimeconfig.cache
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\ref\Blogic_ukol_vancik.dll
+C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.sourcelink.json

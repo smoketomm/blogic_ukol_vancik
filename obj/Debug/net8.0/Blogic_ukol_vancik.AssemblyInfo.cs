@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("Blogic_ukol_vancik")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+0519ccb852a393d6a1ec04dac0944cd0f9b43387")]
 [assembly: System.Reflection.AssemblyProductAttribute("Blogic_ukol_vancik")]
 [assembly: System.Reflection.AssemblyTitleAttribute("Blogic_ukol_vancik")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -13,6 +13,14 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\imgs\\pravnik-pozadi.jpg",
+      "PackagePath": "staticwebassets\\imgs\\pravnik-pozadi.jpg"
+    },
+    {
+      "Id": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\imgs\\smlouva.png",
+      "PackagePath": "staticwebassets\\imgs\\smlouva.png"
+    },
+    {
       "Id": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },
