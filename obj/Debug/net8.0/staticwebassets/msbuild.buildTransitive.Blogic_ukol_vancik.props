@@ -1,0 +1,3 @@
+﻿<Project>
+  <Import Project="..\buildMultiTargeting\Blogic_ukol_vancik.props" />
+</Project>
