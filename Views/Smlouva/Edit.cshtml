@@ -1,0 +1,69 @@
+﻿@model (List<Blogic_ukol_vancik.Models.Klient> Klients, List<Blogic_ukol_vancik.Models.Spravce> Spravci, Blogic_ukol_vancik.Models.Smlouva Smlouva)
+
+@{
+    var spravciProSmlouvu = ViewBag.SpravciViewBag as List<Blogic_ukol_vancik.Models.Spravce>;
+}
+
+<head>
+    <title>@ViewData["Title"] - úprava smlouvy</title>
+</head>
+
+<div class="container mt-4">
+    <form asp-controller="Smlouva" asp-action="Edit" method="post">
+
+        <input type="hidden" name="upravenaSmlouva.ID" value="@Model.Smlouva.ID" />
+
+        <div class="form-group mb-3">
+            <label for="instituceID">Instituce</label>
+            <input required type="text" class="form-control" id="instituceID" name="upravenaSmlouva.Instituce" aria-describedby="instituceHelp" placeholder="Zadejte instituci" value="@Model.Smlouva.Instituce">
+            <small id="instituceHelp" class="form-text text-muted">Instituce, která uzavírá smlouvu.</small>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="klientID">Klient</label>
+            <select class="form-control" id="klientID" name="upravenaSmlouva.Klient">
+                <option value="@Model.Smlouva.Klient" selected>@Model.Smlouva.Klient</option>
+                @foreach (var klient in Model.Klients)
+                {
+                    string celeJmeno = $"{klient.Jmeno} {klient.Prijmeni}";
+                    <option value="@celeJmeno">@celeJmeno</option>
+                }
+            </select>
+        </div>
+
+        <div class="form-group mb-3">
+            <label>Správci</label>
+            @foreach (var spravce in Model.Spravci)
+            {
+                <div class="form-check">
+                    @if (spravciProSmlouvu != null && spravciProSmlouvu.Any(s => s.ID == spravce.ID))
+                    {
+                        <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID" checked>
+                    }
+                    else
+                    {
+                        <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID">
+                    }
+                    <label class="form-check-label" for="spravce_@spravce.ID">
+                        @spravce.Jmeno @spravce.Prijmeni #@spravce.ID.ToString("D4")
+                    </label>
+                </div>
+            }
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="datumPlatnostiID">Datum platnosti</label>
+            <input required type="date" class="form-control" id="datumPlatnostiID" name="upravenaSmlouva.DatumPlatnosti" aria-describedby="datumPlatnostiHelp" value="@Model.Smlouva.DatumPlatnosti?.ToString("yyyy-MM-dd")">
+            <small id="datumPlatnostiHelp" class="form-text text-muted">Zvolte datum platnosti</small>
+        </div>
+
+        <div class="form-group mb-3">
+            <label for="datumUkonceniID">Datum Ukončení</label>
+            <input required type="date" class="form-control" id="datumUkonceniID" name="upravenaSmlouva.DatumUkonceni" aria-describedby="datumUkonceniHelp" value="@Model.Smlouva.DatumUkonceni?.ToString("yyyy-MM-dd")">
+            <small id="datumUkonceniHelp" class="form-text text-muted">Zvolte datum Ukončení</small>
+        </div>
+
+        <button type="submit" class="btn btn-warning">Upravit Smlouvu</button>
+        <a asp-controller="Home" asp-action="Index" class="btn btn-danger">Zpět na seznam</a>
+    </form>
+</div>

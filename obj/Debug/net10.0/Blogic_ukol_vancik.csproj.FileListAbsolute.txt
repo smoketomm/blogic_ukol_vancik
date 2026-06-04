@@ -235,4 +235,4 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\bin\Debug\net10.0\global.json
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\p5esx3767t-{0}-in9g2yqgrd-in9g2yqgrd.gz
-C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\qe0otz2dzb-{0}-jxpdbqsn2u-jxpdbqsn2u.gz
+C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\qe0otz2dzb-{0}-j2n1t3k7xz-j2n1t3k7xz.gz

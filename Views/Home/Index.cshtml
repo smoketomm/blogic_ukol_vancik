@@ -2,7 +2,8 @@
 
 @{
     ViewData["Title"] = "Správce smluv";
-    string spravceRetezec = string.Empty;
+    var vsechnyVazby = ViewBag.Vazby as List<Blogic_ukol_vancik.Models.SmlouvaSpravce>;
+    var vsichniSpravci = ViewBag.Spravci as List<Blogic_ukol_vancik.Models.Spravce>;
 }
 
 <header class="home-header mb-3">
@@ -15,19 +16,26 @@
     <div class="seznam-smlouvy">
         @foreach (var smlouva in Model)
         {
+            var VazbyID = vsechnyVazby?.Where(v => v.SmlouvaID == smlouva.ID).ToList();
+            var SpravciID = VazbyID?.Select(v => v.SpravceID).ToList();
+            var jmenaSpravcu = vsichniSpravci?
+        .Where(s => SpravciID != null && SpravciID.Contains(s.ID))
+        .ToList();
+
                     <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
                         <div class="seznam-smlouva-text">
                             <p>Ev. číslo: @smlouva.EvCislo</p>
                             <p>Instituce: @smlouva.Instituce</p>
                             <p>Klient: @smlouva.Klient</p>
-                            <p>Správce smlouvy: </p>
-                            <p>Datum uzavření: @smlouva.DatumUzavreni</p>
+                    <p>Správce smlouvy: <span>@string.Join(", ", jmenaSpravcu.Select(s => $"{s.Jmeno} {s.Prijmeni}"))</span></p>
+                    <p>Datum uzavření: @smlouva.DatumUzavreni</p>
                             <p>Datum platnosti: @smlouva.DatumPlatnosti</p>
                             <p>Datum ukončení: @smlouva.DatumUkonceni</p>
                         </div>
                         <div class="seznam-smlouva-tlacitka d-flex gap-3">
-                            <button type="button" class="btn btn-primary">Zobrazit</button>
-                            <button type="button" class="btn btn-success">Upravit</button>
+                            <a asp-controller="Smlouva" asp-action="Show" asp-route-id="@smlouva.ID" class="btn btn-primary">Zobrazit</a>
+                            <a asp-controller="Smlouva" asp-action="Edit" asp-route-id="@smlouva.ID" class="btn btn-success">Upravit</a>
+                            <a asp-controller="Smlouva" asp-action="Delete" asp-route-id="@smlouva.ID" class="btn btn-danger">Smazat</a>
                         </div>
                     </div> 
         }

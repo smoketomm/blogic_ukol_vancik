@@ -1,0 +1,21 @@
+﻿@model Blogic_ukol_vancik.Models.Smlouva
+
+@{
+    var spravciProSmlouvu = ViewBag.SpravciViewBag as List<Blogic_ukol_vancik.Models.Spravce>;
+}
+
+<div class="container">
+    <h1>Detail smlouvy</h1>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Ev. číslo:</strong> @Model.EvCislo</p>
+            <p><strong>Instituce:</strong> @Model.Instituce</p>
+            <p><strong>Klient:</strong> @Model.Klient</p>
+            <p><strong>Spravci:</strong> <span>@string.Join(", ", spravciProSmlouvu.Select(s => $"{s.Jmeno} {s.Prijmeni}"))</span></p>
+            <p><strong>Datum uzavření:</strong> @Model.DatumUzavreni</p>
+            <p><strong>Datum platnosti:</strong> @Model.DatumPlatnosti</p>
+            <p><strong>Datum ukončení:</strong> @Model.DatumUkonceni</p>
+            <a asp-controller="Home" asp-action="Index" class="btn btn-danger mt-3">Zpět na seznam smluv</a>
+        </div>
+    </div>
+</div>

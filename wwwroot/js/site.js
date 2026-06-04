@@ -9,8 +9,6 @@ document.getElementById("submitTlacitkoSmlouvaCRT").addEventListener("click", as
     const checkedOne = Array.from(checkboxes).some(x => x.checked);
     let checkedCheckboxy = Array.from(checkboxes).filter(x => x.checked).map(x => x.value);
 
-    alert(checkedCheckboxy[0])
-
     if (!checkedOne) {
         return alert("ani jeden spravce neni vybrany")
     }

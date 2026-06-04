@@ -11,5 +11,6 @@ namespace Blogic_ukol_vancik.Data
         public DbSet<Klient> Klienti {  get; set; }
         public DbSet<Spravce> Spravci {  get; set; }
         public DbSet<Smlouva> Smlouvy {  get; set; }
+        public DbSet<SmlouvaSpravce> SmlouvySpravci { get; set; }
     }
 }

@@ -19,6 +19,10 @@ namespace Blogic_ukol_vancik.Controllers
         public IActionResult Index()
         {
             List<Smlouva> seznamSmluv = _context.Smlouvy.ToList();
+
+            ViewBag.Vazby = _context.SmlouvySpravci.ToList();
+            ViewBag.Spravci = _context.Spravci.ToList();
+
             return View(seznamSmluv);
         }
 
