@@ -15,13 +15,13 @@
     <div class="seznam-smlouvy">
         @foreach (var smlouva in Model)
         {
-                     <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
+                    <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
                         <div class="seznam-smlouva-text">
                             <p>Ev. číslo: @smlouva.evCislo</p>
                             <p>Instituce: @smlouva.instituce</p>
                             <p>Klient: @smlouva.klient</p>
-                                <p>Správce smlouvy: @for (int i = 0; i < smlouva.SpravciID.Count; i++) { spravceRetezec += $"{smlouva.SpravciID[i]}, ";} @spravceRetezec @{spravceRetezec = string.Empty;}</p>
-                                <p>Datum uzavření: @smlouva.datumUzavreni</p>
+                            <p>Správce smlouvy: @for (int i = 0; i < smlouva.SpravciID.Count; i++) { spravceRetezec += $"{smlouva.SpravciID[i]}, ";} @spravceRetezec @{spravceRetezec = string.Empty;}</p>
+                            <p>Datum uzavření: @smlouva.datumUzavreni</p>
                             <p>Datum platnosti: @smlouva.datumPlatnosti</p>
                             <p>Datum ukončení: @smlouva.datumUkonceni</p>
                         </div>
@@ -31,5 +31,5 @@
                         </div>
                     </div> 
         }
-      </div>
+    </div>
 </div>
