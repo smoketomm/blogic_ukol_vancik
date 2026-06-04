@@ -8,6 +8,8 @@ namespace Blogic_ukol_vancik.Data
     {
         public MostDataDbContext(DbContextOptions<MostDataDbContext> options) : base(options) { }
 
-        public DbSet<Klienti> Klient {  get; set; }
+        public DbSet<Klient> Klienti {  get; set; }
+        public DbSet<Spravce> Spravci {  get; set; }
+        public DbSet<Smlouva> Smlouvy {  get; set; }
     }
 }

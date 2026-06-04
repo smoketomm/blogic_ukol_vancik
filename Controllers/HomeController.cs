@@ -1,3 +1,4 @@
+using Blogic_ukol_vancik.Data;
 using Blogic_ukol_vancik.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
@@ -7,18 +8,18 @@ namespace Blogic_ukol_vancik.Controllers
 {
     public class HomeController : Controller
     {
+        private readonly MostDataDbContext _context;
         private readonly ILogger<HomeController> _logger;
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, MostDataDbContext context)
         {
+            _context = context;
             _logger = logger;
         }
 
         public IActionResult Index()
         {
-            List<SmlouvaViewModel> smlouvy = new List<SmlouvaViewModel>();
-            smlouvy.Add(new SmlouvaViewModel { evCislo = 1111, instituce = "CSOB", klient = "Mavek", SpravciID = new List<string>(){"Tomáš"}, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
-            smlouvy.Add(new SmlouvaViewModel { evCislo = 555, instituce = "Alianz", klient = "Kuba", SpravciID = new List<string>() { "Picus" }, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
-            return View(smlouvy);
+            List<Smlouva> seznamSmluv = _context.Smlouvy.ToList();
+            return View(seznamSmluv);
         }
 
         public IActionResult Privacy()

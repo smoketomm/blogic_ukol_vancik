@@ -1,13 +1,16 @@
-﻿namespace Blogic_ukol_vancik.Models
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Blogic_ukol_vancik.Models
 {
     public class Uzivatel
     {
-        public string jmeno { get; set; }
-        public string prijmeni { get; set; }
-        public string email { get; set; }
-        public string telefon { get; set; }
-        public int rodneCislo { get; set; }
-        public int vek {  get; set; }
-        public virtual bool jeSpravce { get; set; }
+        [Key] public int ID { get; set; }
+        public string Jmeno { get; set; }
+        public string Prijmeni { get; set; }
+        public string Email { get; set; }
+        public int Telefon { get; set; }
+        public int RodneCislo { get; set; }
+        public int Vek {  get; set; }
+        public bool JeSpravce { get; set; }
     }
 }

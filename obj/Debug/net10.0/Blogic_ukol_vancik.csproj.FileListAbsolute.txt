@@ -161,9 +161,7 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\scopedcss\Views\Shared\_Layout.cshtml.rz.scp.css
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\scopedcss\bundle\Blogic_ukol_vancik.styles.css
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\scopedcss\projectbundle\Blogic_ukol_vancik.bundle.scp.css
-C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\p5esx3767t-{0}-3ps31i08la-3ps31i08la.gz
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\z52p0fq8cp-{0}-61n19gt1b8-61n19gt1b8.gz
-C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\qe0otz2dzb-{0}-b3evy44epu-b3evy44epu.gz
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\2a0mh6jyur-{0}-o4kljnuqsx-o4kljnuqsx.gz
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\e7jvzrhfk1-{0}-agp80tu62r-agp80tu62r.gz
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\j0tqqpj6cg-{0}-st1cbwfwo5-st1cbwfwo5.gz
@@ -236,3 +234,5 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\ref\Blogic_ukol_vancik.dll
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\bin\Debug\net10.0\global.json
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\staticwebassets.upToDateCheck.txt
+C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\p5esx3767t-{0}-in9g2yqgrd-in9g2yqgrd.gz
+C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net10.0\compressed\qe0otz2dzb-{0}-jxpdbqsn2u-jxpdbqsn2u.gz

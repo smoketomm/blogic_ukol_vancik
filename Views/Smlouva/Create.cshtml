@@ -1,4 +1,6 @@
-﻿@{
+﻿@model (List<Blogic_ukol_vancik.Models.Klient> Klients, List<Blogic_ukol_vancik.Models.Spravce> Spravci)
+
+@{
 	ViewData["Title"] = "Vytvoreni smlouvy";
 }
 
@@ -11,29 +13,29 @@
   <form>
     <div class="form-group">
         <label for="InstituceID">Instituce</label>
-        <input required type="text" class="form-control" id="instituceID" aria-describedby="instituceHelp" placeholder="Zadejte instituce">
+        <input required type="text" class="form-control" id="instituceID" aria-describedby="instituceHelp" placeholder="Zadejte instituci">
         <small id="instituceHelp" class="form-text text-muted">Instituce, která uzavírá smlouvu.</small>
     </div>
     <div class="form-group">
       <label for="klientID">Klient</label>
       <select class="form-control" id="klientID">
         <option selected>Vyberte klienta...</option>
-        <option>1</option>
-        <option>2</option>
-        <option>3</option>
-        <option>4</option>
-        <option>5</option>
-      </select>
+                @foreach(var klient in Model.Klients)
+                    {
+                        <option>@klient.Jmeno @klient.Prijmeni</option>
+                    }
+                </select>
     </div>
       <div class="form-group">
       <label for="spravciID">Spracvci</label>
-       <div class="form-check">
-        <input class="form-check-input" type="checkbox" value="" id="checkBox1">
-        <label class="form-check-label" for="checkBox1">
-            Tomas
-        </label>
-        </div>
-    </div>
+            @foreach (var spravci in Model.Spravci)
+            {
+                <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="@spravci.ID" value="@spravci.ID">
+                    <label class="form-check-label" for="id=@spravci.ID">@spravci.Jmeno @spravci.Prijmeni #@spravci.ID.ToString("D4")</label>
+                </div>
+            }
+          </div>
    <div class="form-group">
     <label for="datumPlatnostiID">Datum platnosti</label>
     <input required type="date" class="form-control" id="datumPlatnostiID" aria-describedby="datumPlatnostiHelp">
@@ -44,6 +46,6 @@
     <input required type="date" class="form-control" id="datumUkonceniID" aria-describedby="datumUkonceniHelp">
     <small id="datumUkonceniHelp" class="form-text text-muted">Zvolte datum Ukonceni</small>
   </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <button class="btn btn-primary" id="submitTlacitkoSmlouvaCRT">Vytvořit Smlouvu</button>
  </form>
 </div>

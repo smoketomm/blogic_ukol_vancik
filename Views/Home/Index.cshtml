@@ -1,4 +1,4 @@
-﻿@model List<SmlouvaViewModel>
+﻿@model List<Blogic_ukol_vancik.Models.Smlouva>
 
 @{
     ViewData["Title"] = "Správce smluv";
@@ -17,13 +17,13 @@
         {
                     <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
                         <div class="seznam-smlouva-text">
-                            <p>Ev. číslo: @smlouva.evCislo</p>
-                            <p>Instituce: @smlouva.instituce</p>
-                            <p>Klient: @smlouva.klient</p>
-                            <p>Správce smlouvy: @for (int i = 0; i < smlouva.SpravciID.Count; i++) { spravceRetezec += $"{smlouva.SpravciID[i]}, ";} @spravceRetezec @{spravceRetezec = string.Empty;}</p>
-                            <p>Datum uzavření: @smlouva.datumUzavreni</p>
-                            <p>Datum platnosti: @smlouva.datumPlatnosti</p>
-                            <p>Datum ukončení: @smlouva.datumUkonceni</p>
+                            <p>Ev. číslo: @smlouva.EvCislo</p>
+                            <p>Instituce: @smlouva.Instituce</p>
+                            <p>Klient: @smlouva.Klient</p>
+                            <p>Správce smlouvy: </p>
+                            <p>Datum uzavření: @smlouva.DatumUzavreni</p>
+                            <p>Datum platnosti: @smlouva.DatumPlatnosti</p>
+                            <p>Datum ukončení: @smlouva.DatumUkonceni</p>
                         </div>
                         <div class="seznam-smlouva-tlacitka d-flex gap-3">
                             <button type="button" class="btn btn-primary">Zobrazit</button>
