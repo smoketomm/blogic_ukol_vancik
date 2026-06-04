@@ -1,41 +1,18 @@
 ﻿@model List<SmlouvaViewModel>
 
 @{
-    ViewData["Title"] = "Home Page";
-    string spravceRetezec = "";
+    ViewData["Title"] = "Správce smluv";
+    string spravceRetezec = string.Empty;
 }
 
 <header class="home-header mb-3">
     <h1>Správce smluv</h1>
 </header>
 <div class="container">
-    <div class="seznam-smlouvy">
-        <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
-            <div class="seznam-smlouva-text">
-                <p>Ev. číslo:</p>
-                <p>Instituce:</p>
-                <p>Klient: </p>
-                <p>Správce smlouvy: </p>
-                <p>Datum uzavření: </p>
-                <p>Datum splatnosti: </p>
-                <p>Datum ukončení: </p>
-            </div>
-            <div class="seznam-smlouva-tlacitka d-flex gap-3">
-                <button type="button" class="btn btn-primary">Zobrazit</button>
-                <button type="button" class="btn btn-success">Upravit</button>
-            </div>
-        </div>
-        <div class="seznam-smlouva d-flex flex-column align-items-center gap-1">
-                <div class="seznam-smlouva-text">
-                <p>Ev. číslo:</p>
-                <p>Instituce:</p>
-                <p>Klient: </p>
-                <p>Správce smlouvy: </p>
-                <p>Datum uzavření: </p>
-                <p>Datum splatnosti: </p>
-                <p>Datum ukončení: </p>
-         </div>
+    <div class="d-flex justify-content-center mb-2">
+        <a class="btn btn-warning" asp-area="" asp-controller="Smlouva" asp-action="Create">Vytvořit smlouvu</a>
     </div>
+    <div class="seznam-smlouvy">
         @foreach (var smlouva in Model)
         {
                      <div class="seznam-smlouva d-flex flex-column align-items-center gap-2">
@@ -43,7 +20,7 @@
                             <p>Ev. číslo: @smlouva.evCislo</p>
                             <p>Instituce: @smlouva.instituce</p>
                             <p>Klient: @smlouva.klient</p>
-                                <p>Správce smlouvy: @for (int i = 0; i < smlouva.Spravci.Count; i++) { spravceRetezec += $"{smlouva.Spravci[i]}, ";} @spravceRetezec @{spravceRetezec = "";}</p>
+                                <p>Správce smlouvy: @for (int i = 0; i < smlouva.SpravciID.Count; i++) { spravceRetezec += $"{smlouva.SpravciID[i]}, ";} @spravceRetezec @{spravceRetezec = string.Empty;}</p>
                                 <p>Datum uzavření: @smlouva.datumUzavreni</p>
                             <p>Datum platnosti: @smlouva.datumPlatnosti</p>
                             <p>Datum ukončení: @smlouva.datumUkonceni</p>
@@ -54,4 +31,5 @@
                         </div>
                     </div> 
         }
+      </div>
 </div>

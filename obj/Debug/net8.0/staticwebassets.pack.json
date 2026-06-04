@@ -25,6 +25,10 @@
       "PackagePath": "staticwebassets\\js\\site.js"
     },
     {
+      "Id": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\lib\\bootstrap4c\\component-chosen.min.css",
+      "PackagePath": "staticwebassets\\lib\\bootstrap4c\\component-chosen.min.css"
+    },
+    {
       "Id": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\lib\\bootstrap\\LICENSE",
       "PackagePath": "staticwebassets\\lib\\bootstrap"
     },

@@ -13,6 +13,7 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.MvcApplicationPartsAssemblyInfo.cache
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.RazorAssemblyInfo.cache
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.RazorAssemblyInfo.cs
+C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.sourcelink.json
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\staticwebassets.build.json
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\staticwebassets.development.json
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\staticwebassets\msbuild.Blogic_ukol_vancik.Microsoft.AspNetCore.StaticWebAssets.props
@@ -28,4 +29,3 @@ C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.pdb
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.genruntimeconfig.cache
 C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\ref\Blogic_ukol_vancik.dll
-C:\Users\PC\source\repos\Blogic_ukol_vancik\Blogic_ukol_vancik\obj\Debug\net8.0\Blogic_ukol_vancik.sourcelink.json

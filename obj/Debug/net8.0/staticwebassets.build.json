@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "5NY7QtQZd5+iNnwuYQXvUjG7h++xuaqok8Cc8zfzi6M=",
+  "Hash": "OEM3dP5FP/va8l03aLs3yr9bjUwgNKj43/3CYq8Q01c=",
   "Source": "Blogic_ukol_vancik",
   "BasePath": "_content/Blogic_ukol_vancik",
   "Mode": "Default",
@@ -1003,6 +1003,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\lib\\bootstrap\\LICENSE"
+    },
+    {
+      "Identity": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\lib\\bootstrap4c\\component-chosen.min.css",
+      "SourceId": "Blogic_ukol_vancik",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\",
+      "BasePath": "_content/Blogic_ukol_vancik",
+      "RelativePath": "lib/bootstrap4c/component-chosen.min.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\lib\\bootstrap4c\\component-chosen.min.css"
     },
     {
       "Identity": "C:\\Users\\PC\\source\\repos\\Blogic_ukol_vancik\\Blogic_ukol_vancik\\wwwroot\\lib\\jquery\\dist\\jquery.js",

@@ -16,8 +16,8 @@ namespace Blogic_ukol_vancik.Controllers
         public IActionResult Index()
         {
             List<SmlouvaViewModel> smlouvy = new List<SmlouvaViewModel>();
-            smlouvy.Add(new SmlouvaViewModel { evCislo = 1111, instituce = "CSOB", klient = "Mavek", Spravci = new List<string>(){"Tomáš"}, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
-            smlouvy.Add(new SmlouvaViewModel { evCislo = 555, instituce = "Aliany", klient = "Kuba", Spravci = new List<string>() { "Picus" }, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
+            smlouvy.Add(new SmlouvaViewModel { evCislo = 1111, instituce = "CSOB", klient = "Mavek", SpravciID = new List<string>(){"Tomáš"}, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
+            smlouvy.Add(new SmlouvaViewModel { evCislo = 555, instituce = "Alianz", klient = "Kuba", SpravciID = new List<string>() { "Picus" }, datumUzavreni = DateTime.Now, datumPlatnosti = DateTime.Now, datumUkonceni = DateTime.Now });
             return View(smlouvy);
         }
 
