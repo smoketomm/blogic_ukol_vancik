@@ -2,5 +2,6 @@
 {
     public class Spravce:Uzivatel
     {
+        public new bool JeSpravce = true;
     }
 }

@@ -12,7 +12,12 @@
 <div class="container">
     <h2>Správci</h2>
     <p>Toto je stránka pro zobrazení správců.</p>
-
+    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce)
+    {
+        <div class="d-flex justify-content-center mb-2">
+            <a class="btn btn-warning" asp-area="" asp-controller="Spravce" asp-action="Create">Vytvořit správce</a>
+        </div>
+    }
     <div class="spravci-list">
         @foreach (var spravce in Model)
         {
@@ -27,8 +32,11 @@
                         <button type="submit" class="btn btn-info">Přihlásit se</button>
                     </form>
                     <a asp-controller="Spravce" asp-action="Show" asp-route-id="@spravce.ID" class="btn btn-primary">Zobrazit</a>
-                    <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@spravce.ID" class="btn btn-success">Upravit</a>
-                    <a asp-controller="Spravce" asp-action="Delete" asp-route-id="@spravce.ID" class="btn btn-danger">Smazat</a>
+                    @if (spravce.Jmeno != "admin")
+                    {
+                        <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@spravce.ID" class="btn btn-success">Upravit</a>
+                        <a asp-controller="Spravce" asp-action="Delete" asp-route-id="@spravce.ID" class="btn btn-danger">Smazat</a>
+                    }
                 </div>
             </div>
         }

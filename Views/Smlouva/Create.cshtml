@@ -30,6 +30,10 @@
       <label for="spravciID">Spracvci</label>
             @foreach (var spravci in Model.Spravci)
             {
+                if (spravci.Jmeno == "admin")
+                {
+                    continue;
+                }
                 <div class="form-check">
                     <input class="form-check-input" type="checkbox" id="@spravci.ID" name="Spravci" value="@spravci.ID">
                     <label class="form-check-label" for="id=@spravci.ID">@spravci.Jmeno @spravci.Prijmeni #@spravci.ID.ToString("D4")</label>

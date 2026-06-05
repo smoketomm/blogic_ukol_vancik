@@ -39,17 +39,20 @@
             @foreach (var spravce in Model.Spravci)
             {
                 <div class="form-check">
-                    @if (spravciProSmlouvu != null && spravciProSmlouvu.Any(s => s.ID == spravce.ID))
+                    @if (spravce.Jmeno != "admin")
                     {
-                        <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID" checked>
+                        if (spravciProSmlouvu != null && spravciProSmlouvu.Any(s => s.ID == spravce.ID))
+                        {
+                            <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID" checked>
+                        }
+                        else
+                        {
+                            <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID">
+                        }
+                        <label class="form-check-label" for="spravce_@spravce.ID">
+                            @spravce.Jmeno @spravce.Prijmeni #@spravce.ID.ToString("D4")
+                        </label>
                     }
-                    else
-                    {
-                        <input class="form-check-input" type="checkbox" name="Spravci" id="spravce_@spravce.ID" value="@spravce.ID">
-                    }
-                    <label class="form-check-label" for="spravce_@spravce.ID">
-                        @spravce.Jmeno @spravce.Prijmeni #@spravce.ID.ToString("D4")
-                    </label>
                 </div>
             }
         </div>

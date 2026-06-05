@@ -11,30 +11,30 @@
 
 <div class="container">
     <h1>Vytvoření správce</h1>
-    <form asp-action="Create" method="post">
+    <form asp-controller="Spravce" asp-action="VytvoritSpravce" method="post">
         <div class="form-group">
             <label for="Jmeno">Jméno:</label>
-            <input type="text" class="form-control" id="Jmeno" name="Jmeno" required>
+            <input type="text" class="form-control" id="Jmeno" name="novySpravce.Jmeno" required>
         </div>
         <div class="form-group">
             <label for="Prijmeni">Příjmení:</label>
-            <input type="text" class="form-control" id="Prijmeni" name="Prijmeni" required>
+            <input type="text" class="form-control" id="Prijmeni" name="novySpravce.Prijmeni" required>
         </div>
         <div class="form-group">
             <label for="Email">Email:</label>
-            <input type="email" class="form-control" id="Email" name="Email" required>
+            <input type="email" class="form-control" id="Email" name="novySpravce.Email" required>
         </div>
         <div class="form-group">
             <label for="Telefon">Telefon:</label>
-            <input type="tel" class="form-control" id="Telefon" name="Telefon" required>
+            <input type="tel" class="form-control" id="Telefon" name="novySpravce.Telefon" required>
         </div>
         <div class="form-group">
             <label for="RodneCislo">Rodné číslo:</label>
-            <input type="number" class="form-control" id="RodneCislo" name="RodneCislo" required>
+            <input type="number" class="form-control" id="RodneCislo" name="novySpravce.RodneCislo" required>
         </div>
         <div class="form-group">
             <label for="Vek">Věk:</label>
-            <input type="number" class="form-control" id="Vek" name="Vek" required>
+            <input type="number" class="form-control" id="Vek" name="novySpravce.Vek" required>
         </div>
         <button type="submit" class="btn btn-primary">Vytvořit</button>
     </form>

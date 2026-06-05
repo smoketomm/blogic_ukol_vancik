@@ -1,0 +1,32 @@
+﻿@model (Blogic_ukol_vancik.Models.Spravce Spravce, List<Blogic_ukol_vancik.Models.Smlouva> Smlouvy)
+
+<div class="container">
+    <h1>Detail správce</h1>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Jméno:</strong> @Model.Spravce.Jmeno</p>
+            <p><strong>Příjmení:</strong> @Model.Spravce.Prijmeni</p>
+            <p><strong>Telefon:</strong> @Model.Spravce.Telefon</p>
+            <p><strong>Email:</strong> @Model.Spravce.Email</p>
+            <p><strong>Rodné číslo:</strong> @Model.Spravce.RodneCislo</p>
+            <p><strong>Věk:</strong> @Model.Spravce.Vek</p>
+        </div>
+    </div>
+    <h1>Přiřazené smlouvy</h1>
+    <div class="card">
+        <div class="card-body">
+            @foreach (var smlouva in Model.Smlouvy)
+            {
+                <div class="mb-3">
+                    <p><strong>Ev. číslo:</strong> @smlouva.EvCislo</p>
+                    <p><strong>Instituce:</strong> @smlouva.Instituce</p>
+                    <p><strong>Klient:</strong> @smlouva.Klient</p>
+                    <p><strong>Datum uzavření:</strong> @smlouva.DatumUzavreni</p>
+                    <p><strong>Datum platnosti:</strong> @smlouva.DatumPlatnosti?.ToString("dd.MM.yyyy")</p>
+                    <p><strong>Datum ukončení:</strong> @smlouva.DatumUkonceni?.ToString("dd.MM.yyyy")</p>
+                    <a asp-controller="Smlouva" asp-action="Show" asp-route-id="@smlouva.ID" class="btn btn-primary">Zobrazit detail smlouvy</a>
+                </div>
+            }
+        </div>
+    </div>
+</div>

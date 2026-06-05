@@ -56,5 +56,67 @@ namespace Blogic_ukol_vancik.Controllers
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
             return RedirectToAction("Index", "Home");
         }
+
+        [HttpPost]
+        public IActionResult VytvoritSpravce(Spravce novySpravce)
+        {
+            if (novySpravce == null || novySpravce.Vek <= 0 || novySpravce.Vek > 99 || novySpravce.RodneCislo.ToString().Length != 10 || novySpravce.Telefon.ToString().Length != 9)
+            {
+                return BadRequest("Neplatný správce.");
+            }
+
+            novySpravce = new Spravce
+            {
+                Jmeno = novySpravce.Jmeno,
+                Prijmeni = novySpravce.Prijmeni,
+                Telefon = novySpravce.Telefon,
+                Email = novySpravce.Email,
+                RodneCislo = novySpravce.RodneCislo,
+                Vek = novySpravce.Vek,
+            };
+
+            _context.Spravci.Add(novySpravce);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Spravce");
+        }
+
+        public IActionResult Show(int id)
+        {
+            var spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
+            var vazbySpravce = _context.SmlouvyVazby.Where(v => v.SpravceID == id).Select(v => v.SmlouvaID).ToList();
+            var smlouvy = _context.Smlouvy.Where(s => vazbySpravce.Contains(s.ID)).ToList();
+            var info = (Spravce: spravce, Smlouvy: smlouvy);
+            return View(info);
+        }
+
+        public IActionResult Delete(int id)
+        {
+            var spravce = _context.Spravci.Find(id);
+            if (spravce == null)
+            {
+                return NotFound();
+            }
+
+            var vazbyKeSmazani = _context.SmlouvyVazby.Where(v => v.SpravceID == id).ToList();
+            var smlouvuSpravce = vazbyKeSmazani.Select(v => v.SmlouvaID).ToList();
+
+            var samotneSmlouvyID = _context.SmlouvyVazby.Where(v => smlouvuSpravce.Contains(v.SmlouvaID)).GroupBy(v => v.SmlouvaID).Where(g => g.Count() == 1).Select(g => g.Key).ToList();
+
+
+            if (samotneSmlouvyID.Any())
+            {
+                return BadRequest("Nelze smazat správce, protože je jediným správcem u některých smluv. Nejprve přiřaďte tyto smlouvy jinému správci.");
+            }
+
+            _context.SmlouvyVazby.RemoveRange(vazbyKeSmazani);
+            _context.Spravci.Remove(spravce);
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Spravce");
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
     }
 }

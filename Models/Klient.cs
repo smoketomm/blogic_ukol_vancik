@@ -2,6 +2,6 @@
 {
     public class Klient:Uzivatel
     {
-
+        public new bool JeSpravce = false;
     }
 }
