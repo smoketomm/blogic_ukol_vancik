@@ -1,0 +1,36 @@
+﻿@model List<Blogic_ukol_vancik.Models.Spravce>
+
+@{
+    ViewData["Title"] = "Správci";
+}
+
+<head>
+    <title>@ViewData["Title"] - Seznam spravcu</title>
+</head>
+
+
+<div class="container">
+    <h2>Správci</h2>
+    <p>Toto je stránka pro zobrazení správců.</p>
+
+    <div class="spravci-list">
+        @foreach (var spravce in Model)
+        {
+            <div class="spravce-profil d-flex flex-column align-items-center gap-2">
+                <div class="spravce-profil-text">
+                    <p>Jméno: @spravce.Jmeno @spravce.Prijmeni</p>
+                    <p>Email: @spravce.Email</p>
+                    <p>Telefon: +420 @spravce.Telefon</p>
+                </div>
+                <div class="spravce-profil-tlacitka d-flex gap-3">
+                    <form asp-controller="Spravce" asp-action="PrihlasitSe" asp-route-id="@spravce.ID" method="post">
+                        <button type="submit" class="btn btn-info">Přihlásit se</button>
+                    </form>
+                    <a asp-controller="Spravce" asp-action="Show" asp-route-id="@spravce.ID" class="btn btn-primary">Zobrazit</a>
+                    <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@spravce.ID" class="btn btn-success">Upravit</a>
+                    <a asp-controller="Spravce" asp-action="Delete" asp-route-id="@spravce.ID" class="btn btn-danger">Smazat</a>
+                </div>
+            </div>
+        }
+    </div>
+</div>

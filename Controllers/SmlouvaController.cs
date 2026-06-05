@@ -1,5 +1,6 @@
 ﻿using Blogic_ukol_vancik.Data;
 using Blogic_ukol_vancik.Models;
+using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Blogic_ukol_vancik.Controllers
@@ -16,43 +17,59 @@ namespace Blogic_ukol_vancik.Controllers
         }
 
         [HttpPost]
-        public IActionResult VytvoritSmlouvu([FromBody] SmlouvaDto data)
+        public IActionResult VytvoritSmlouvu(Smlouva novaSmlouva, List<int> Spravci, int KlientID)
         {
-
-            Smlouva novaSmlouva = new Smlouva
+            if (Spravci == null || Spravci.Count == 0 || novaSmlouva.DatumPlatnosti < DateTime.Now || novaSmlouva.DatumUkonceni < DateTime.Now || novaSmlouva.DatumUkonceni < novaSmlouva.DatumPlatnosti)
             {
-                EvCislo = nahoda.Next(100, 1000),
-                Instituce = data.Instituce,
-                Klient = data.Klient,
-                DatumUzavreni = DateTime.Now,
-                DatumPlatnosti = DateTime.Parse(data.DatumPlatnosti?.ToString("yyyy-MM-dd")),
-                DatumUkonceni = DateTime.Parse(data.DatumUkonceni?.ToString("yyyy-MM-dd"))
-            };
+                return BadRequest(new { message = "Neplatne hodnoty" });
+            }
 
+            int EvCisloGen = nahoda.Next(100, 1000);
+
+
+            while (_context.Smlouvy.Any(smlouva => smlouva.EvCislo == EvCisloGen))
+            {
+                EvCisloGen = nahoda.Next(100, 1000);
+            }
+
+            string[] casti = novaSmlouva.Klient.Split('|');
+
+            int klientID = int.Parse(casti[0]);
+            string Klient = casti[1];
+
+            novaSmlouva = new Smlouva
+            {
+                EvCislo = EvCisloGen,
+                Instituce = novaSmlouva.Instituce,
+                Klient = Klient,
+                DatumUzavreni = DateTime.Now,
+                DatumPlatnosti = novaSmlouva.DatumPlatnosti,
+                DatumUkonceni = novaSmlouva.DatumUkonceni
+            };
 
             _context.Smlouvy.Add(novaSmlouva);
             _context.SaveChanges();
 
             _context.Entry(novaSmlouva).Reload();
 
+            List<SmlouvaVazba> seznamZaznamu = new List<SmlouvaVazba>();
 
-            List<SmlouvaSpravce> seznamZaznamu = new List<SmlouvaSpravce>();
-
-            for (int i = 0; i < data.Spravce.Count; i++)
+            foreach(int spravceId in Spravci)
             {
-                SmlouvaSpravce novyDotaz = new SmlouvaSpravce
+                SmlouvaVazba novyDotaz = new SmlouvaVazba
                 {
-                    SpravceID = int.Parse(data.Spravce[i]),
-                    SmlouvaID = novaSmlouva.ID
+                    SpravceID = spravceId,
+                    SmlouvaID = novaSmlouva.ID,
+                    KlientID = klientID
                 };
-
                 seznamZaznamu.Add(novyDotaz);
             }
 
-            _context.SmlouvySpravci.AddRange(seznamZaznamu);
+            _context.SmlouvyVazby.AddRange(seznamZaznamu);
             _context.SaveChanges();
 
-            return Ok(new { message = "uloženo úspěšně!" });
+            return RedirectToAction("Index", "Home");
+
         }
 
         public IActionResult Create()
@@ -75,12 +92,16 @@ namespace Blogic_ukol_vancik.Controllers
                 return NotFound();
             }
 
-            var prirazeneVazby = _context.SmlouvySpravci.Where(v => v.SmlouvaID == id).ToList();
+            var prirazeneVazby = _context.SmlouvyVazby.Where(v => v.SmlouvaID == id).ToList();
             var SpravciID = prirazeneVazby.Select(v => v.SpravceID).ToList();
+            var KlientID = prirazeneVazby.Select(v => v.KlientID).FirstOrDefault();
+
 
             ViewBag.SpravciViewBag = _context.Spravci.Where(s => SpravciID.Contains(s.ID)).ToList();
 
-            return View(smlouva);
+            var seznam = (ContextKlient: _context.Klienti.FirstOrDefault(k => k.ID == KlientID), Smlouva: smlouva);
+
+            return View(seznam);
         }
 
         public IActionResult Delete(int id)
@@ -93,9 +114,9 @@ namespace Blogic_ukol_vancik.Controllers
                 return NotFound();
             }
 
-            var vazbyKeSmazani = _context.SmlouvySpravci.Where(v => v.SmlouvaID == id).ToList();
+            var vazbyKeSmazani = _context.SmlouvyVazby.Where(v => v.SmlouvaID == id).ToList();
 
-            _context.SmlouvySpravci.RemoveRange(vazbyKeSmazani);
+            _context.SmlouvyVazby.RemoveRange(vazbyKeSmazani);
             _context.Smlouvy.Remove(smlouva);
 
             _context.SaveChanges();
@@ -112,7 +133,7 @@ namespace Blogic_ukol_vancik.Controllers
                 return NotFound();
             }
 
-            var prirazeneVazby = _context.SmlouvySpravci.Where(v => v.SmlouvaID == id).ToList();
+            var prirazeneVazby = _context.SmlouvyVazby.Where(v => v.SmlouvaID == id).ToList();
             var SpravciID = prirazeneVazby.Select(v => v.SpravceID).ToList();
 
             ViewBag.SpravciViewBag = _context.Spravci.Where(s => SpravciID.Contains(s.ID)).ToList();
@@ -129,22 +150,33 @@ namespace Blogic_ukol_vancik.Controllers
             var staraSmlouva = _context.Smlouvy.FirstOrDefault(s => s.ID == upravenaSmlouva.ID);
             if (staraSmlouva == null) return NotFound();
 
+            if (Spravci == null || Spravci.Count == 0 || upravenaSmlouva.DatumPlatnosti < DateTime.Now  || upravenaSmlouva.DatumUkonceni < DateTime.Now || upravenaSmlouva.DatumUkonceni < upravenaSmlouva.DatumPlatnosti)
+            {
+                return BadRequest(new { message = "Neplatne hodnoty" });
+            }
+
+            string[] casti = upravenaSmlouva.Klient.Split("|");
+
+            int klientID = int.Parse(casti[0]);
+            string klient = casti[1];
+
             staraSmlouva.Instituce = upravenaSmlouva.Instituce;
-            staraSmlouva.Klient = upravenaSmlouva.Klient;
+            staraSmlouva.Klient = klient;
             staraSmlouva.DatumPlatnosti = upravenaSmlouva.DatumPlatnosti;
             staraSmlouva.DatumUkonceni = upravenaSmlouva.DatumUkonceni;
 
-            var stareVazby = _context.SmlouvySpravci.Where(v => v.SmlouvaID == upravenaSmlouva.ID).ToList();
-            _context.SmlouvySpravci.RemoveRange(stareVazby);
+            var stareVazby = _context.SmlouvyVazby.Where(v => v.SmlouvaID == upravenaSmlouva.ID).ToList();
+            _context.SmlouvyVazby.RemoveRange(stareVazby);
 
             if (Spravci != null)
             {
-                foreach (var spravceId in Spravci)
+                foreach (int spravceId in Spravci)
                 {
-                    _context.SmlouvySpravci.Add(new SmlouvaSpravce
+                    _context.SmlouvyVazby.Add(new SmlouvaVazba
                     {
                         SmlouvaID = upravenaSmlouva.ID,
-                        SpravceID = spravceId
+                        SpravceID = spravceId,
+                        KlientID = klientID
                     });
                 }
             }

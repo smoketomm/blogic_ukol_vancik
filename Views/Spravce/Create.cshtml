@@ -1,0 +1,41 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    ViewData["Title"] = "Vytvoření správce";
+}
+
+<head>
+    <title>@ViewData["Title"] - vytvoř správce</title>
+</head>
+
+<div class="container">
+    <h1>Vytvoření správce</h1>
+    <form asp-action="Create" method="post">
+        <div class="form-group">
+            <label for="Jmeno">Jméno:</label>
+            <input type="text" class="form-control" id="Jmeno" name="Jmeno" required>
+        </div>
+        <div class="form-group">
+            <label for="Prijmeni">Příjmení:</label>
+            <input type="text" class="form-control" id="Prijmeni" name="Prijmeni" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="Email" required>
+        </div>
+        <div class="form-group">
+            <label for="Telefon">Telefon:</label>
+            <input type="tel" class="form-control" id="Telefon" name="Telefon" required>
+        </div>
+        <div class="form-group">
+            <label for="RodneCislo">Rodné číslo:</label>
+            <input type="number" class="form-control" id="RodneCislo" name="RodneCislo" required>
+        </div>
+        <div class="form-group">
+            <label for="Vek">Věk:</label>
+            <input type="number" class="form-control" id="Vek" name="Vek" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Vytvořit</button>
+    </form>
+</div>

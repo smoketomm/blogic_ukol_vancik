@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -19,13 +20,36 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
+                    <ul class="navbar-nav flex-grow-1 d-flex justify-content-between">
+                        <div class="d-flex">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                            </li>
+                        </div>
+                        <div class="d-flex align-items-center">
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Spravce" asp-action="Index">Spravci</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Uzivatel" asp-action="KlientiShow">Klienti</a>
+                            </li>
+                            <li class="nav-item d-flex">
+                                @if (_uzivatelContext.aktualniUzivatel != null && User.Identity.IsAuthenticated)
+                                {
+                                    <span class="nav-link text-dark">Přihlášen jako: @_uzivatelContext.aktualniUzivatel.Jmeno @_uzivatelContext.aktualniUzivatel.Prijmeni | </span>
+                                    <form asp-controller="Spravce" asp-action="Odhlasit" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-link nav-link text-dark">Odhlásit se</button>
+                                    </form>
+                                }
+                                else if (_uzivatelContext.aktualniUzivatel == null)
+                                {
+                                    <span class="nav-link text-dark">Přihlášen jako: Host</span>
+                                }
+                            </li>
+                        </div>
                     </ul>
                 </div>
             </div>

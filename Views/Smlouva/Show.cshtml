@@ -1,4 +1,4 @@
-﻿@model Blogic_ukol_vancik.Models.Smlouva
+﻿@model (Blogic_ukol_vancik.Models.Klient klient, Blogic_ukol_vancik.Models.Smlouva smlouva)
 
 @{
     var spravciProSmlouvu = ViewBag.SpravciViewBag as List<Blogic_ukol_vancik.Models.Spravce>;
@@ -8,14 +8,32 @@
     <h1>Detail smlouvy</h1>
     <div class="card">
         <div class="card-body">
-            <p><strong>Ev. číslo:</strong> @Model.EvCislo</p>
-            <p><strong>Instituce:</strong> @Model.Instituce</p>
-            <p><strong>Klient:</strong> @Model.Klient</p>
+            <p><strong>Ev. číslo:</strong> @Model.smlouva.EvCislo</p>
+            <p><strong>Instituce:</strong> @Model.smlouva.Instituce</p>
+            <p><strong>Klient:</strong> @Model.klient.Jmeno @Model.klient.Prijmeni</p>
             <p><strong>Spravci:</strong> <span>@string.Join(", ", spravciProSmlouvu.Select(s => $"{s.Jmeno} {s.Prijmeni}"))</span></p>
-            <p><strong>Datum uzavření:</strong> @Model.DatumUzavreni</p>
-            <p><strong>Datum platnosti:</strong> @Model.DatumPlatnosti</p>
-            <p><strong>Datum ukončení:</strong> @Model.DatumUkonceni</p>
+            <p><strong>Datum uzavření:</strong> @Model.smlouva.DatumUzavreni</p>
+            <p><strong>Datum platnosti:</strong> @Model.smlouva.DatumPlatnosti</p>
+            <p><strong>Datum ukončení:</strong> @Model.smlouva.DatumUkonceni</p>
             <a asp-controller="Home" asp-action="Index" class="btn btn-danger mt-3">Zpět na seznam smluv</a>
         </div>
     </div>
+    <h1>Správci</h1>
+    @foreach (var spravce in spravciProSmlouvu)
+    {
+        <div class="card mb-2">
+            <div class="card-body">
+                <p><strong>Jméno:</strong> @spravce.Jmeno @spravce.Prijmeni</p>
+                <p><strong>Email:</strong> @spravce.Email</p>
+                <p><strong>Telefon:</strong> +420 @spravce.Telefon</p>
+            </div>
+        </div>
+    }
+    <h1>Klient</h1>
+    <div class="card">
+        <div class="card-body">
+            <p><strong>Jméno:</strong> @Model.klient.Jmeno @Model.klient.Prijmeni</p>
+            <p><strong>Email:</strong> @Model.klient.Email</p>
+            <p><strong>Telefon:</strong> +420 @Model.klient.Telefon</p>
+        </div>
 </div>

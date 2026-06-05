@@ -1,6 +1,6 @@
 ﻿namespace Blogic_ukol_vancik.Models
 {
-    public class PrihlasenyUzivatelViewModel: Uzivatel
+    public class PrihlasenyUzivatel: Uzivatel
     {
 
     }

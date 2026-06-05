@@ -2,7 +2,6 @@ using Blogic_ukol_vancik.Data;
 using Blogic_ukol_vancik.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
-using System.Security.Cryptography.Xml;
 
 namespace Blogic_ukol_vancik.Controllers
 {
@@ -20,7 +19,7 @@ namespace Blogic_ukol_vancik.Controllers
         {
             List<Smlouva> seznamSmluv = _context.Smlouvy.ToList();
 
-            ViewBag.Vazby = _context.SmlouvySpravci.ToList();
+            ViewBag.Vazby = _context.SmlouvyVazby.ToList();
             ViewBag.Spravci = _context.Spravci.ToList();
 
             return View(seznamSmluv);

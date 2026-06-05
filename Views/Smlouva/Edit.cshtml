@@ -2,6 +2,8 @@
 
 @{
     var spravciProSmlouvu = ViewBag.SpravciViewBag as List<Blogic_ukol_vancik.Models.Spravce>;
+    var aktualniKlientId = Model.Klients
+        .FirstOrDefault(k => $"{k.Jmeno} {k.Prijmeni}" == Model.Smlouva.Klient)?.ID;
 }
 
 <head>
@@ -22,11 +24,12 @@
         <div class="form-group mb-3">
             <label for="klientID">Klient</label>
             <select class="form-control" id="klientID" name="upravenaSmlouva.Klient">
-                <option value="@Model.Smlouva.Klient" selected>@Model.Smlouva.Klient</option>
+                <option value="@aktualniKlientId|@Model.Smlouva.Klient" selected>@Model.Smlouva.Klient</option>
                 @foreach (var klient in Model.Klients)
                 {
                     string celeJmeno = $"{klient.Jmeno} {klient.Prijmeni}";
-                    <option value="@celeJmeno">@celeJmeno</option>
+                    if (celeJmeno == Model.Smlouva.Klient) continue;
+                    <option value="@klient.ID|@celeJmeno">@celeJmeno</option>
                 }
             </select>
         </div>

@@ -2,7 +2,7 @@
 
 @{
     ViewData["Title"] = "Správce smluv";
-    var vsechnyVazby = ViewBag.Vazby as List<Blogic_ukol_vancik.Models.SmlouvaSpravce>;
+    var vsechnyVazby = ViewBag.Vazby as List<Blogic_ukol_vancik.Models.SmlouvaVazba>;
     var vsichniSpravci = ViewBag.Spravci as List<Blogic_ukol_vancik.Models.Spravce>;
 }
 
@@ -10,9 +10,12 @@
     <h1>Správce smluv</h1>
 </header>
 <div class="container">
-    <div class="d-flex justify-content-center mb-2">
-        <a class="btn btn-warning" asp-area="" asp-controller="Smlouva" asp-action="Create">Vytvořit smlouvu</a>
-    </div>
+    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce)
+    {
+        <div class="d-flex justify-content-center mb-2">
+            <a class="btn btn-warning" asp-area="" asp-controller="Smlouva" asp-action="Create">Vytvořit smlouvu</a>
+        </div>
+    }
     <div class="seznam-smlouvy">
         @foreach (var smlouva in Model)
         {
@@ -27,15 +30,18 @@
                             <p>Ev. číslo: @smlouva.EvCislo</p>
                             <p>Instituce: @smlouva.Instituce</p>
                             <p>Klient: @smlouva.Klient</p>
-                    <p>Správce smlouvy: <span>@string.Join(", ", jmenaSpravcu.Select(s => $"{s.Jmeno} {s.Prijmeni}"))</span></p>
-                    <p>Datum uzavření: @smlouva.DatumUzavreni</p>
-                            <p>Datum platnosti: @smlouva.DatumPlatnosti</p>
-                            <p>Datum ukončení: @smlouva.DatumUkonceni</p>
+                            <p>Správce smlouvy: <span>@string.Join(", ", jmenaSpravcu.Select(s => $"{s.Jmeno} {s.Prijmeni}"))</span></p>
+                            <p>Datum uzavření: @smlouva.DatumUzavreni?.ToString("d.M.yyyy - H:mm")</p>
+                            <p>Datum platnosti: @smlouva.DatumPlatnosti?.ToString("d.M.yyyy")</p>
+                            <p>Datum ukončení: @smlouva.DatumUkonceni?.ToString("d.M.yyyy")</p>
                         </div>
                         <div class="seznam-smlouva-tlacitka d-flex gap-3">
                             <a asp-controller="Smlouva" asp-action="Show" asp-route-id="@smlouva.ID" class="btn btn-primary">Zobrazit</a>
-                            <a asp-controller="Smlouva" asp-action="Edit" asp-route-id="@smlouva.ID" class="btn btn-success">Upravit</a>
-                            <a asp-controller="Smlouva" asp-action="Delete" asp-route-id="@smlouva.ID" class="btn btn-danger">Smazat</a>
+                            @if (_uzivatelContext.aktualniUzivatel != null && SpravciID.Contains(_uzivatelContext.aktualniUzivatel.ID))
+                            {
+                                <a asp-controller="Smlouva" asp-action="Edit" asp-route-id="@smlouva.ID" class="btn btn-success">Upravit</a>
+                                <a asp-controller="Smlouva" asp-action="Delete" asp-route-id="@smlouva.ID" class="btn btn-danger">Smazat</a>
+                            }
                         </div>
                     </div> 
         }
