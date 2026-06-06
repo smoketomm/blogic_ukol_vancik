@@ -65,3 +65,13 @@ body {
 .seznam-smlouva-tlacitka, .spravce-profil-tlacitka, .klient-profil-tlacitka {
     justify-self: end;
 }
+
+.logo-pro {
+    text-transform: capitalize;
+    padding: 5px 7px;
+    border-radius: 10px;
+    background: red;
+    font-weight: bold;
+    color: #fff !important;
+    transform: skewx(-10deg);
+}

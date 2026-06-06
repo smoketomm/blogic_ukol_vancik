@@ -27,13 +27,13 @@ namespace Blogic_ukol_vancik.Controllers
         [HttpPost]
         public async Task<IActionResult> PrihlasitSe(int id)
         {
-            var spravce = await _context.Spravci.FindAsync(id);
+            Spravce spravce = await _context.Spravci.FindAsync(id);
             if (spravce == null)
             {
                 return NotFound();
             }
 
-            var claims = new List<Claim>
+            List<Claim> claims = new List<Claim>
             {
                 new Claim(ClaimTypes.NameIdentifier, spravce.ID.ToString()),
                 new Claim(ClaimTypes.Name, spravce.Jmeno),
@@ -41,7 +41,7 @@ namespace Blogic_ukol_vancik.Controllers
                 new Claim("JeSpravce", spravce.JeSpravce.ToString())
             };
 
-            var claimsID = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
+            ClaimsIdentity claimsID = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsID));
 
@@ -52,9 +52,14 @@ namespace Blogic_ukol_vancik.Controllers
         [HttpPost]
         public IActionResult VytvoritSpravce(Spravce novySpravce)
         {
-            if (novySpravce == null || novySpravce.Vek <= 0 || novySpravce.Vek > 99 || novySpravce.RodneCislo.ToString().Length != 10 || novySpravce.Telefon.ToString().Length != 9)
+            if (novySpravce == null || !int.TryParse(novySpravce.Telefon, out _) || !int.TryParse(novySpravce.RodneCislo, out _))
             {
-                return BadRequest("Neplatný správce.");
+                return BadRequest("Neplatné hodnoty.");
+            }
+
+            if (novySpravce.Vek <= 0 || novySpravce.Vek > 99 || novySpravce.RodneCislo.Length != 10 || novySpravce.Telefon.Length != 9 || int.Parse(novySpravce.RodneCislo) < 0 || int.Parse(novySpravce.Telefon) < 0)
+            {
+                return BadRequest("Neplatné hodnoty.");
             }
 
             novySpravce = new Spravce
@@ -65,11 +70,11 @@ namespace Blogic_ukol_vancik.Controllers
                 Email = novySpravce.Email,
                 RodneCislo = novySpravce.RodneCislo,
                 Vek = novySpravce.Vek,
-            };
+            }; 
 
             _context.Spravci.Add(novySpravce);
             _context.SaveChanges();
-            return RedirectToAction("Index", "Spravce");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Show(int id)
@@ -81,18 +86,18 @@ namespace Blogic_ukol_vancik.Controllers
             return View(info);
         }
 
-        public IActionResult Delete(int id)
+        public async Task<IActionResult> Delete(int id)
         {
-            var spravce = _context.Spravci.Find(id);
+            Spravce spravce = _context.Spravci.Find(id);
             if (spravce == null)
             {
                 return NotFound();
             }
 
-            var vazbyKeSmazani = _context.SmlouvyVazby.Where(v => v.SpravceID == id).ToList();
-            var smlouvuSpravce = vazbyKeSmazani.Select(v => v.SmlouvaID).ToList();
+            List<SmlouvaVazba> vazbyKeSmazani = _context.SmlouvyVazby.Where(v => v.SpravceID == id).ToList();
+            List<int> smlouvuSpravce = vazbyKeSmazani.Select(v => v.SmlouvaID).ToList();
 
-            var samotneSmlouvyID = _context.SmlouvyVazby.Where(v => smlouvuSpravce.Contains(v.SmlouvaID)).GroupBy(v => v.SmlouvaID).Where(g => g.Count() == 1).Select(g => g.Key).ToList();
+            List<int> samotneSmlouvyID = _context.SmlouvyVazby.Where(v => smlouvuSpravce.Contains(v.SmlouvaID)).GroupBy(v => v.SmlouvaID).Where(g => g.Count() == 1).Select(g => g.Key).ToList();
 
 
             if (samotneSmlouvyID.Any())
@@ -100,10 +105,15 @@ namespace Blogic_ukol_vancik.Controllers
                 return BadRequest("Nelze smazat správce, protože je jediným správcem u některých smluv. Nejprve přiřaďte tyto smlouvy jinému správci.");
             }
 
+            if (User.Identity.IsAuthenticated && User.FindFirst(ClaimTypes.NameIdentifier)?.Value == id.ToString() && User.FindFirst("JeSpravce")?.Value == "True")
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+            }
+
             _context.SmlouvyVazby.RemoveRange(vazbyKeSmazani);
             _context.Spravci.Remove(spravce);
             _context.SaveChanges();
-            return RedirectToAction("Index", "Spravce");
+            return RedirectToAction("Index");
         }
 
         public IActionResult Create()
@@ -113,14 +123,19 @@ namespace Blogic_ukol_vancik.Controllers
 
 
         [HttpPost]
-        public IActionResult Edit(Spravce upravenySpravce)
+        public IActionResult UpravitSpravce(Spravce upravenySpravce)
         {
 
-            var starySpravce = _context.Spravci.FirstOrDefault(s => s.ID == upravenySpravce.ID);
+            Spravce starySpravce = _context.Spravci.FirstOrDefault(s => s.ID == upravenySpravce.ID);
 
             if (starySpravce == null) return NotFound();
 
-            if (upravenySpravce.Vek <= 0 || upravenySpravce.Vek > 99 || upravenySpravce.RodneCislo.ToString().Length != 10 || upravenySpravce.Telefon.ToString().Length != 9)
+            if (upravenySpravce == null || !int.TryParse(upravenySpravce.Telefon, out _) || !int.TryParse(upravenySpravce.RodneCislo, out _))
+            {
+                return BadRequest("Neplatné hodnoty.");
+            }
+
+            if (upravenySpravce.Vek <= 0 || upravenySpravce.Vek > 99 || upravenySpravce.RodneCislo.Length != 10 || upravenySpravce.Telefon.Length != 9 || int.Parse(upravenySpravce.RodneCislo) < 0 || int.Parse(upravenySpravce.Telefon) < 0)
             {
                 return BadRequest("Neplatné hodnoty.");
             }
@@ -138,7 +153,7 @@ namespace Blogic_ukol_vancik.Controllers
 
         public IActionResult Edit(int id)
         {
-            var spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
+            Spravce spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
             if (spravce == null)
             {
                 return NotFound();

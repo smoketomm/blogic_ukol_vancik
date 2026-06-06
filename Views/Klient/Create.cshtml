@@ -1,5 +1,45 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+<div class="container">
+    @if( _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce)
+    {
+        <h1>Vytvoření klienta</h1>
+    }
+    else
+    {
+        <h1>Registrace klienta</h1>
+    }
+    <form asp-controller="Klient" asp-action="VytvoritKlienta" method="post">
+        <div class="form-group">
+            <label for="Jmeno">Jméno:</label>
+            <input type="text" class="form-control" id="Jmeno" name="novyKlient.Jmeno" required>
+        </div>
+        <div class="form-group">
+            <label for="Prijmeni">Příjmení:</label>
+            <input type="text" class="form-control" id="Prijmeni" name="novyKlient.Prijmeni" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="novyKlient.Email" required>
+        </div>
+        <div class="form-group">
+            <label for="Telefon">Telefon:</label>
+            <input type="tel" placeholder="444..." class="form-control" id="Telefon" name="novyKlient.Telefon" required>
+        </div>
+        <div class="form-group">
+            <label for="RodneCislo">Rodné číslo:</label>
+            <input type="number" class="form-control" id="RodneCislo" name="novyKlient.RodneCislo" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="Vek">Věk:</label>
+            <input type="number" class="form-control" id="Vek" name="novyKlient.Vek" required>
+        </div>
+        @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce)
+        {
+            <button type="submit" class="btn btn-success">Vytvořit</button>
+        }
+        else
+        {
+            <button type="submit" class="btn btn-success">Registovat</button>
+        }
+    </form>
+</div>

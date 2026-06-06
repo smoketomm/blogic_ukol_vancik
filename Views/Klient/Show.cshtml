@@ -5,7 +5,7 @@
         <div class="card-body">
             <p><strong>Jméno:</strong> @Model.klient.Jmeno</p>
             <p><strong>Příjmení:</strong> @Model.klient.Prijmeni</p>
-            <p><strong>Telefon:</strong> @Model.klient.Telefon</p>
+            <p><strong>Telefon:</strong>+420 @(long.Parse(Model.klient.Telefon).ToString("### ### ###"))</p>
             <p><strong>Email:</strong> @Model.klient.Email</p>
             <p><strong>Rodné číslo:</strong> @Model.klient.RodneCislo</p>
             <p><strong>Věk:</strong> @Model.klient.Vek</p>

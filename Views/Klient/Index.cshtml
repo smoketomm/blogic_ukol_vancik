@@ -1,5 +1,15 @@
 ﻿@model List<Blogic_ukol_vancik.Models.Klient>
 
+
+@{
+
+    ViewData["Title"] = "Klienti";
+}
+
+<head>
+    <title>@ViewData["Title"] - seznam klientů</title>
+</head>
+
 <div class="container">
     <h2>Klienti</h2>
     <p>Toto je stránka pro zobrazení klientů.</p>
@@ -9,7 +19,7 @@
             <a class="btn btn-warning" asp-area="" asp-controller="Klient" asp-action="Create">Vytvořit klienta</a>
         </div>
     }
-    else
+    else if (_uzivatelContext.aktualniUzivatel == null)
     {
         <div class="d-flex justify-content-center mb-2">
             <a class="btn btn-success" asp-area="" asp-controller="Klient" asp-action="Create">Registrovat se</a>
@@ -22,7 +32,7 @@
                 <div class="klient-profil-text">
                     <p>Jméno: @klient.Jmeno @klient.Prijmeni</p>
                     <p>Email: @klient.Email</p>
-                    <p>Telefon: +420 @klient.Telefon</p>
+                    <p>Telefon: +420 @(long.Parse(klient.Telefon).ToString("### ### ###"))</p>
                 </div>
                 <div class="klient-profil-tlacitka d-flex gap-3">
                     <form asp-controller="Klient" asp-action="PrihlasitSe" asp-route-id="@klient.ID" method="post">
@@ -34,9 +44,9 @@
                         <a asp-controller="Klient" asp-action="Edit" asp-route-id="@klient.ID" class="btn btn-success">Upravit</a>
                         <a asp-controller="Klient" asp-action="Delete" asp-route-id="@klient.ID" class="btn btn-danger">Smazat</a>
                     }
-                    else if (klient.ID != 8 && _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == 8)
+                    else if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == 8 && _uzivatelContext.aktualniUzivatel.JeSpravce)
                     {
-                        <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@klient.ID" class="btn btn-success">Upravit</a>
+                        <a asp-controller="Klient" asp-action="Edit" asp-route-id="@klient.ID" class="btn btn-success">Upravit</a>
                         <a asp-controller="Klient" asp-action="Delete" asp-route-id="@klient.ID" class="btn btn-danger">Smazat</a>
                     }
                 </div>

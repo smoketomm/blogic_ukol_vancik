@@ -25,7 +25,8 @@
             <div class="card-body">
                 <p><strong>Jméno:</strong> @spravce.Jmeno @spravce.Prijmeni</p>
                 <p><strong>Email:</strong> @spravce.Email</p>
-                <p><strong>Telefon:</strong> +420 @spravce.Telefon</p>
+                <p><strong>Telefon:</strong> +420 @(long.Parse(spravce.Telefon).ToString("### ### ###"))</p>
+                <a asp-controller="Spravce" asp-action="Show" asp-route-id="@spravce.ID" class="btn btn-primary">Zobrazit detail</a>
             </div>
         </div>
     }
@@ -34,6 +35,7 @@
         <div class="card-body">
             <p><strong>Jméno:</strong> @Model.klient.Jmeno @Model.klient.Prijmeni</p>
             <p><strong>Email:</strong> @Model.klient.Email</p>
-            <p><strong>Telefon:</strong> +420 @Model.klient.Telefon</p>
+            <p><strong>Telefon:</strong> +420 @(long.Parse(Model.klient.Telefon).ToString("### ### ###"))</p>
+            <a asp-controller="Klient" asp-action="Show" asp-route-id="@Model.klient.ID" class="btn btn-primary">Zobrazit detail</a>
         </div>
 </div>

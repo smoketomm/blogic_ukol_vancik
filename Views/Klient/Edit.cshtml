@@ -1,5 +1,36 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿@model Blogic_ukol_vancik.Models.Klient
+
+
+<div class="container">
+    <h1>Úprava klienta</h1>
+    <form asp-controller="Klient" asp-action="UpravitKlienta" method="post">
+
+        <input type="hidden" name="upravenyKlient.ID" value="@Model.ID">
+
+        <div class="form-group">
+            <label for="Jmeno">Jméno:</label>
+            <input type="text" class="form-control" id="Jmeno" name="upravenyKlient.Jmeno" value="@Model.Jmeno" required>
+        </div>
+        <div class="form-group">
+            <label for="Prijmeni">Příjmení:</label>
+            <input type="text" class="form-control" id="Prijmeni" name="upravenyKlient.Prijmeni" value="@Model.Prijmeni" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="upravenyKlient.Email" value="@Model.Email" required>
+        </div>
+        <div class="form-group">
+            <label for="Telefon">Telefon:</label>
+            <input type="tel" class="form-control" id="Telefon" name="upravenyKlient.Telefon" value="@Model.Telefon" required>
+        </div>
+        <div class="form-group">
+            <label for="RodneCislo">Rodné číslo:</label>
+            <input type="number" class="form-control" id="RodneCislo" name="upravenyKlient.RodneCislo" value="@Model.RodneCislo" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="Vek">Věk:</label>
+            <input type="number" class="form-control" id="Vek" name="upravenyKlient.Vek" value="@Model.Vek" required>
+        </div>
+        <button type="submit" class="btn btn-warning">Upravit Klienta</button>
+    </form>
+</div>
