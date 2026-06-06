@@ -28,9 +28,12 @@
                     <p>Telefon: +420 @(long.Parse(spravce.Telefon).ToString("### ### ###"))</p>
                 </div>
                 <div class="spravce-profil-tlacitka d-flex gap-3">
-                    <form asp-controller="Spravce" asp-action="PrihlasitSe" asp-route-id="@spravce.ID" method="post">
-                        <button type="submit" class="btn btn-info">Přihlásit se</button>
-                    </form>
+                    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID != spravce.ID)
+                    {
+                        <form asp-controller="Spravce" asp-action="PrihlasitSe" asp-route-id="@spravce.ID" method="post">
+                            <button type="submit" class="btn btn-info">Přihlásit se</button>
+                        </form>
+                    }
                     <a asp-controller="Spravce" asp-action="Show" asp-route-id="@spravce.ID" class="btn btn-primary">Zobrazit</a>
                     @if (spravce.ID != 8 && _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == spravce.ID)
                     {

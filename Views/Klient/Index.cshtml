@@ -35,9 +35,12 @@
                     <p>Telefon: +420 @(long.Parse(klient.Telefon).ToString("### ### ###"))</p>
                 </div>
                 <div class="klient-profil-tlacitka d-flex gap-3">
-                    <form asp-controller="Klient" asp-action="PrihlasitSe" asp-route-id="@klient.ID" method="post">
-                        <button type="submit" class="btn btn-info">Přihlásit se</button>
-                    </form>
+                    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID != klient.ID)
+                    {
+                        <form asp-controller="Klient" asp-action="PrihlasitSe" asp-route-id="@klient.ID" method="post">
+                            <button type="submit" class="btn btn-info">Přihlásit se</button>
+                        </form>
+                    }
                     <a asp-controller="Klient" asp-action="Show" asp-route-id="@klient.ID" class="btn btn-primary">Zobrazit</a>
                     @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == klient.ID)
                     {
