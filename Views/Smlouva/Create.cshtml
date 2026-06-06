@@ -30,7 +30,7 @@
       <label for="spravciID">Spracvci</label>
             @foreach (var spravci in Model.Spravci)
             {
-                if (spravci.Jmeno == "admin")
+                if (spravci.ID == 8)
                 {
                     continue;
                 }

@@ -1,0 +1,44 @@
+﻿@model Blogic_ukol_vancik.Models.Spravce
+
+
+@{
+    ViewData["Title"] = "Úprava správce";
+}
+
+<head>
+    <title>@ViewData["Title"] - upravit správce</title>
+</head>
+
+<div class="container">
+    <h1>Úprava správce</h1>
+    <form asp-controller="Spravce" asp-action="Edit" method="post">
+
+        <input type="hidden" name="upravenySpravce.ID" value="@Model.ID">
+
+        <div class="form-group">
+            <label for="Jmeno">Jméno:</label>
+            <input type="text" class="form-control" id="Jmeno" name="upravenySpravce.Jmeno" value="@Model.Jmeno" required>
+        </div>
+        <div class="form-group">
+            <label for="Prijmeni">Příjmení:</label>
+            <input type="text" class="form-control" id="Prijmeni" name="upravenySpravce.Prijmeni" value="@Model.Prijmeni" required>
+        </div>
+        <div class="form-group">
+            <label for="Email">Email:</label>
+            <input type="email" class="form-control" id="Email" name="upravenySpravce.Email" value="@Model.Email" required>
+        </div>
+        <div class="form-group">
+            <label for="Telefon">Telefon:</label>
+            <input type="tel" class="form-control" id="Telefon" name="upravenySpravce.Telefon" value="@Model.Telefon" required>
+        </div>
+        <div class="form-group">
+            <label for="RodneCislo">Rodné číslo:</label>
+            <input type="number" class="form-control" id="RodneCislo" name="upravenySpravce.RodneCislo" value="@Model.RodneCislo" required>
+        </div>
+        <div class="form-group mb-3">
+            <label for="Vek">Věk:</label>
+            <input type="number" class="form-control" id="Vek" name="upravenySpravce.Vek" value="@Model.Vek" required>
+        </div>
+        <button type="submit" class="btn btn-primary">Upravit</button>
+    </form>
+</div>

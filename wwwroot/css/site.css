@@ -47,7 +47,7 @@ body {
     transform: skewx(-10deg);
 }
 
-.seznam-smlouvy, .spravci-list {
+.seznam-smlouvy, .spravci-list, .klienti-list {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
@@ -55,13 +55,13 @@ body {
     flex: 1 1 0px;
 }
 
-.seznam-smlouva, .spravce-profil {
+.seznam-smlouva, .spravce-profil, .klient-profil {
     padding: 30px 50px;
     border: 1px solid grey;
     font-size: 20px;
     border-radius: 7px;
 }
 
-.seznam-smlouva-tlacitka {
+.seznam-smlouva-tlacitka, .spravce-profil-tlacitka, .klient-profil-tlacitka {
     justify-self: end;
 }

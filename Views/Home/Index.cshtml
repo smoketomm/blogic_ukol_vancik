@@ -10,7 +10,7 @@
     <h1>Správce smluv</h1>
 </header>
 <div class="container">
-    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce && _uzivatelContext.aktualniUzivatel.Jmeno != "admin")
+    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce && _uzivatelContext.aktualniUzivatel.ID != 8)
     {
         <div class="d-flex justify-content-center mb-2">
             <a class="btn btn-warning" asp-area="" asp-controller="Smlouva" asp-action="Create">Vytvořit smlouvu</a>

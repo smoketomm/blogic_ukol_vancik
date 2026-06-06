@@ -1,15 +1,14 @@
-﻿@model (Blogic_ukol_vancik.Models.Spravce Spravce, List<Blogic_ukol_vancik.Models.Smlouva> Smlouvy)
-
+﻿@model (Blogic_ukol_vancik.Models.Klient klient, List<Blogic_ukol_vancik.Models.Smlouva> Smlouvy)
 <div class="container">
-    <h1>Detail správce</h1>
+    <h1>Detail klienta</h1>
     <div class="card">
         <div class="card-body">
-            <p><strong>Jméno:</strong> @Model.Spravce.Jmeno</p>
-            <p><strong>Příjmení:</strong> @Model.Spravce.Prijmeni</p>
-            <p><strong>Telefon:</strong> @Model.Spravce.Telefon</p>
-            <p><strong>Email:</strong> @Model.Spravce.Email</p>
-            <p><strong>Rodné číslo:</strong> @Model.Spravce.RodneCislo</p>
-            <p><strong>Věk:</strong> @Model.Spravce.Vek</p>
+            <p><strong>Jméno:</strong> @Model.klient.Jmeno</p>
+            <p><strong>Příjmení:</strong> @Model.klient.Prijmeni</p>
+            <p><strong>Telefon:</strong> @Model.klient.Telefon</p>
+            <p><strong>Email:</strong> @Model.klient.Email</p>
+            <p><strong>Rodné číslo:</strong> @Model.klient.RodneCislo</p>
+            <p><strong>Věk:</strong> @Model.klient.Vek</p>
         </div>
     </div>
     <h1>Přiřazené smlouvy</h1>

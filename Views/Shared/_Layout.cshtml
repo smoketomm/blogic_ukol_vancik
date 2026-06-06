@@ -34,13 +34,13 @@
                                 <a class="nav-link text-dark" asp-area="" asp-controller="Spravce" asp-action="Index">Spravci</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Uzivatel" asp-action="KlientiShow">Klienti</a>
+                                <a class="nav-link text-dark" asp-area="" asp-controller="Klient" asp-action="Index">Klienti</a>
                             </li>
                             <li class="nav-item d-flex">
                                 @if (_uzivatelContext.aktualniUzivatel != null && User.Identity.IsAuthenticated)
                                 {
-                                    <span class="nav-link text-dark">Přihlášen jako: @_uzivatelContext.aktualniUzivatel.Jmeno @_uzivatelContext.aktualniUzivatel.Prijmeni | </span>
-                                    <form asp-controller="Spravce" asp-action="Odhlasit" method="post" class="d-inline">
+                                    <span class="nav-link text-dark">Přihlášen jako: @_uzivatelContext.aktualniUzivatel.Jmeno @_uzivatelContext.aktualniUzivatel.Prijmeni - @(_uzivatelContext.aktualniUzivatel.JeSpravce ? "Správce" : "Klient") | </span>
+                                    <form asp-controller="Home" asp-action="Odhlasit" method="post" class="d-inline">
                                         <button type="submit" class="btn btn-link nav-link text-dark">Odhlásit se</button>
                                     </form>
                                 }

@@ -3,7 +3,7 @@
 
 // Write your JavaScript code.
 
-document.getElementById("submitTlacitkoSmlouvaCRT").addEventListener("click", async function () {
+/*document.getElementById("submitTlacitkoSmlouvaCRT").addEventListener("click", async function () {
 
     const checkboxes = document.querySelectorAll('input[type="checkbox"]');
     const checkedOne = Array.from(checkboxes).some(x => x.checked);
@@ -17,7 +17,7 @@ document.getElementById("submitTlacitkoSmlouvaCRT").addEventListener("click", as
     let datumSplatnostiFormat = `${dSID.getDate()}. ${dSID.getMonth()}. ${dSID.getFullYear()}`
 
     let dUID = document.getElementById("datumUkonceniID").value
-    let datumUkonceniFormat = `${dUID.getDate()}. ${dUID.getMonth()}. ${dUID.getFullYear()}`*/
+    let datumUkonceniFormat = `${dUID.getDate()}. ${dUID.getMonth()}. ${dUID.getFullYear()}`
 
     const smlouvaData = {
         instituce: document.getElementById("instituceID").value,
@@ -42,4 +42,4 @@ document.getElementById("submitTlacitkoSmlouvaCRT").addEventListener("click", as
     else {
         alert("Neco se nepovedlo")
     }
-})
+})*/

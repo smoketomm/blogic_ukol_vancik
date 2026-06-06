@@ -32,7 +32,12 @@
                         <button type="submit" class="btn btn-info">Přihlásit se</button>
                     </form>
                     <a asp-controller="Spravce" asp-action="Show" asp-route-id="@spravce.ID" class="btn btn-primary">Zobrazit</a>
-                    @if (spravce.Jmeno != "admin")
+                    @if (spravce.ID != 8 && _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == spravce.ID)
+                    {
+                        <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@spravce.ID" class="btn btn-success">Upravit</a>
+                        <a asp-controller="Spravce" asp-action="Delete" asp-route-id="@spravce.ID" class="btn btn-danger">Smazat</a>
+                    }
+                    else if (spravce.ID != 8 && _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == 8)
                     {
                         <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@spravce.ID" class="btn btn-success">Upravit</a>
                         <a asp-controller="Spravce" asp-action="Delete" asp-route-id="@spravce.ID" class="btn btn-danger">Smazat</a>

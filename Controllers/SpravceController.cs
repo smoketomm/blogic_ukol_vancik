@@ -27,8 +27,6 @@ namespace Blogic_ukol_vancik.Controllers
         [HttpPost]
         public async Task<IActionResult> PrihlasitSe(int id)
         {
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine($"Přihlašování správce s ID: {id}");
             var spravce = await _context.Spravci.FindAsync(id);
             if (spravce == null)
             {
@@ -39,6 +37,7 @@ namespace Blogic_ukol_vancik.Controllers
             {
                 new Claim(ClaimTypes.NameIdentifier, spravce.ID.ToString()),
                 new Claim(ClaimTypes.Name, spravce.Jmeno),
+                new Claim("Prijmeni", spravce.Prijmeni),
                 new Claim("JeSpravce", spravce.JeSpravce.ToString())
             };
 
@@ -47,14 +46,7 @@ namespace Blogic_ukol_vancik.Controllers
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(claimsID));
 
 
-            return RedirectToAction("Index", "Spravce");
-        }
-
-        [HttpPost]
-        public async Task<IActionResult> Odhlasit()
-        {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("Index");
         }
 
         [HttpPost]
@@ -82,10 +74,10 @@ namespace Blogic_ukol_vancik.Controllers
 
         public IActionResult Show(int id)
         {
-            var spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
-            var vazbySpravce = _context.SmlouvyVazby.Where(v => v.SpravceID == id).Select(v => v.SmlouvaID).ToList();
-            var smlouvy = _context.Smlouvy.Where(s => vazbySpravce.Contains(s.ID)).ToList();
-            var info = (Spravce: spravce, Smlouvy: smlouvy);
+            Spravce spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
+            List<int> vazbySpravce = _context.SmlouvyVazby.Where(v => v.SpravceID == id).Select(v => v.SmlouvaID).ToList();
+            List<Smlouva> smlouvy = _context.Smlouvy.Where(s => vazbySpravce.Contains(s.ID)).ToList();
+            (Spravce Spravce, List<Smlouva> Smlouvy) info = (Spravce: spravce, Smlouvy: smlouvy);
             return View(info);
         }
 
@@ -117,6 +109,42 @@ namespace Blogic_ukol_vancik.Controllers
         public IActionResult Create()
         {
             return View();
+        }
+
+
+        [HttpPost]
+        public IActionResult Edit(Spravce upravenySpravce)
+        {
+
+            var starySpravce = _context.Spravci.FirstOrDefault(s => s.ID == upravenySpravce.ID);
+
+            if (starySpravce == null) return NotFound();
+
+            if (upravenySpravce.Vek <= 0 || upravenySpravce.Vek > 99 || upravenySpravce.RodneCislo.ToString().Length != 10 || upravenySpravce.Telefon.ToString().Length != 9)
+            {
+                return BadRequest("Neplatné hodnoty.");
+            }
+
+            starySpravce.Jmeno = upravenySpravce.Jmeno;
+            starySpravce.Prijmeni = upravenySpravce.Prijmeni;
+            starySpravce.Telefon = upravenySpravce.Telefon;
+            starySpravce.Email = upravenySpravce.Email;
+            starySpravce.RodneCislo = upravenySpravce.RodneCislo;
+            starySpravce.Vek = upravenySpravce.Vek;
+
+            _context.SaveChanges();
+            return RedirectToAction("Index", "Spravce");
+        }
+
+        public IActionResult Edit(int id)
+        {
+            var spravce = _context.Spravci.FirstOrDefault(s => s.ID == id);
+            if (spravce == null)
+            {
+                return NotFound();
+            }
+
+            return View(spravce);
         }
     }
 }

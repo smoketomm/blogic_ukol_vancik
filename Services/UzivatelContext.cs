@@ -27,6 +27,7 @@ namespace Blogic_ukol_vancik.Services
                 {
                     ID = int.Parse(uzivatel.FindFirst(ClaimTypes.NameIdentifier)?.Value ?? "0"),
                     Jmeno = uzivatel.Identity.Name,
+                    Prijmeni = uzivatel.FindFirst("Prijmeni")?.Value,
                     JeSpravce = bool.Parse(uzivatel.FindFirst("JeSpravce")?.Value ?? "false")
                 };
             }

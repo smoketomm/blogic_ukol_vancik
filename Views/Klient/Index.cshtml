@@ -1,0 +1,46 @@
+﻿@model List<Blogic_ukol_vancik.Models.Klient>
+
+<div class="container">
+    <h2>Klienti</h2>
+    <p>Toto je stránka pro zobrazení klientů.</p>
+    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.JeSpravce)
+    {
+        <div class="d-flex justify-content-center mb-2">
+            <a class="btn btn-warning" asp-area="" asp-controller="Klient" asp-action="Create">Vytvořit klienta</a>
+        </div>
+    }
+    else
+    {
+        <div class="d-flex justify-content-center mb-2">
+            <a class="btn btn-success" asp-area="" asp-controller="Klient" asp-action="Create">Registrovat se</a>
+        </div>
+    }
+    <div class="klienti-list">
+        @foreach (var klient in Model)
+        {
+            <div class="klient-profil d-flex flex-column align-items-center gap-2">
+                <div class="klient-profil-text">
+                    <p>Jméno: @klient.Jmeno @klient.Prijmeni</p>
+                    <p>Email: @klient.Email</p>
+                    <p>Telefon: +420 @klient.Telefon</p>
+                </div>
+                <div class="klient-profil-tlacitka d-flex gap-3">
+                    <form asp-controller="Klient" asp-action="PrihlasitSe" asp-route-id="@klient.ID" method="post">
+                        <button type="submit" class="btn btn-info">Přihlásit se</button>
+                    </form>
+                    <a asp-controller="Klient" asp-action="Show" asp-route-id="@klient.ID" class="btn btn-primary">Zobrazit</a>
+                    @if (_uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == klient.ID)
+                    {
+                        <a asp-controller="Klient" asp-action="Edit" asp-route-id="@klient.ID" class="btn btn-success">Upravit</a>
+                        <a asp-controller="Klient" asp-action="Delete" asp-route-id="@klient.ID" class="btn btn-danger">Smazat</a>
+                    }
+                    else if (klient.ID != 8 && _uzivatelContext.aktualniUzivatel != null && _uzivatelContext.aktualniUzivatel.ID == 8)
+                    {
+                        <a asp-controller="Spravce" asp-action="Edit" asp-route-id="@klient.ID" class="btn btn-success">Upravit</a>
+                        <a asp-controller="Klient" asp-action="Delete" asp-route-id="@klient.ID" class="btn btn-danger">Smazat</a>
+                    }
+                </div>
+            </div>
+        }
+    </div>
+</div>
